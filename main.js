@@ -1,3 +1,4 @@
+//manca il salvataggio dei risultati con la lettura dei punti
 const express = require("express");
 const http = require("http");
 const path = require("path");
@@ -38,6 +39,10 @@ app.get("/ratings",(req, res)=>{
     });
 });
 
+/**
+ * Funzione per generare un array (lunghezza = 3) di id delle domande da restituire al client
+ * @returns promise
+ */
 const generaArrayID= () =>{
     return new Promise((resolve,reject)=>{
         const array = [];
@@ -51,6 +56,9 @@ const generaArrayID= () =>{
         resolve(array);
     });
 }
+/**
+ * Funzione per restituire al client le domande generate in modo casuale
+ */
 app.get("/questions", (req, resp) => {
   leggiFile("./jsons/domande.json").then((domande) => {
         domande = JSON.parse(domande);
@@ -71,6 +79,19 @@ app.get("/questions", (req, resp) => {
   });
 });
 
+/**
+ * Funzione che invia lato client al server le risposte che l'utente ha dato
+ */
+app.post("/answers",(req,resp)=>{
+    console.log('richiamato');
+    const data = req.body;
+    console.log(data);
+    resp.json({result: 'ok'});
+}); 
+
+/**
+ * Creazione del server
+ */
 const server = http.createServer(app);
 server.listen(80, () => {
   console.log("-> server running");

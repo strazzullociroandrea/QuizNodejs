@@ -1,3 +1,5 @@
+//manca il timer e la gestione del timestamp
+
 const persone = document.getElementById("persone");
 const nome = document.getElementById("nome");
 const confermaNome = document.getElementById("confermaNome");
@@ -64,22 +66,43 @@ const recuperaDomande = () =>{
     });
 }
 
-//  ------>   main
+/**
+ * Funzione per salvare lato server le risposte date dall'utente
+ * @param {*} json 
+ * @returns promise
+ */
+const salvaRisultato = (json) =>{
+    return new Promise((resolve,reject)=>{
+        fetch("/answers",{
+            method: "POST",
+            headers:{
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                risultato: json
+            })
+        }).then(response => response.json()).then(response => resolve(response));
+    });
+}
 /**
  * Funzione di visualizzazione della wall of fame
- * da mettere in una funzione di rendering
  */
-recuperaPersone().then(response =>{
-    if(response){
-        //ordinamento decrescente per rating
-        response = response.sort((a,b)=>  b.rating - a.rating);
-        persone.innerHTML = "";
-        response.forEach(persona => {
-            persone.innerHTML += "<tr><td>"+persona.username+"</td><td>"+persona.timestamp+"</td><td>"+persona.rating+"</td></tr>"
-        });
-    }
-});
+const renderWall = () => {
+    recuperaPersone().then(response =>{
+        if(response){
+            //ordinamento decrescente per rating
+            response = response.sort((a,b)=>  b.rating - a.rating);
+            persone.innerHTML = "";
+            response.forEach(persona => {
+                persone.innerHTML += "<tr><td>"+persona.username+"</td><td>"+persona.timestamp+"</td><td>"+persona.rating+"</td></tr>"
+            });
+        }
+    });
+}
 
+//  ------>   main
+
+renderWall();
 /**
  * Gestione input nome
  */
@@ -105,16 +128,15 @@ confermaNome.onclick = () =>{
         for(let i=0;i<domande.length;i++){
             let riga = domandaTemplate;
             riga = riga.replace("%DOMANDA",domande[i].question);
-            console.log(domande[i].answers);
             for(let j=0;j<domande[i].answers.length;j++){
                 riga = riga.replace("%RADIO"+(j+1),domande[i].answers[j]).replace("%RADIO"+(j+1),j).replace("%CERCA","input");
             }
             html += riga;
         }
         domandeDiv.innerHTML = html+'<div class="row justify-content-end><div class="col-auto"><input type="button" id="confermaRisposte" class="btn btn-success mt-3" value="Conferma"/></div></div>';
+        const inputs = document.querySelectorAll(".input");
         //gestione risposte
         document.getElementById("confermaRisposte").onclick = () =>{
-            const inputs = document.querySelectorAll(".input");
             const risposteDate = [];
             let conta = 0;
             for(let i=0;i<inputs.length;i++){
@@ -127,6 +149,7 @@ confermaNome.onclick = () =>{
             }
             partita['timestamp'] = "";//non so cosa inserire
             partita['answers'] = risposteDate;
+            salvaRisultato(partita).then(()=>{window.location.reload();});
         }
     });
     }
