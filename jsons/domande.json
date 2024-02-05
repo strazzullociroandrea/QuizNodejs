@@ -1,0 +1,61 @@
+{
+    "title": "Domande di informatica",
+    "timer": 180,
+    "questions": [
+      {
+        "id": "0",
+        "question": "Cos'è nodejs?",
+        "answers": ["Un runtime", "Non esiste", "Un protocollo", "Un server"]
+      },
+      {
+        "id": "1",
+        "question": "Che cosa signifca HTML?",
+        "answers": [
+          "Hyperlink and Text Manipulation Language",
+          "HyperTransfer Markup Logic",
+          "HighTech Modern Language",
+          "HyperText Markup Language"
+        ]
+      },
+      {
+        "id": "2",
+        "question": "Per cosa si utilizza java?",
+        "answers": ["Per creare delle jsp", "Per creare delle servlet", "Per giocare a biliardo", "Tutte e tre le precedenti"]
+      },
+      {
+        "id": "3",
+        "question": "Quale affermazione per php è corretta?",
+        "answers": ["Si usa per creare API", "Si può eseguire solo lato server", "Non è tipizzato", "Tutte e tre le precedenti"]
+      },
+      {
+        "id": "4",
+        "question": "Cos'è express?",
+        "answers": ["E' un framework per applicazioni nodejs", "E' un treno", "E' un film", "Non esiste"]
+      },
+      {
+        "id": "5",
+        "question": "Cos'è una variabile globale?",
+        "answers": ["Una variabile visibile in tutto il mondo", "Una variabile visibile all'interno di una sola funzione", "Una funzione visibile da qualsiasi funzione", "E' una variabile"]
+      },
+      {
+        "id": "6",
+        "question": "Quale fra queste fa parte del ciclo di vita del software?",
+        "answers": ["Coding", "Build", "Running & debugginh", "Tutte e tre le precedenti"]
+      },
+      {
+        "id": "7",
+        "question": "A cosa serve l'html?",
+        "answers": ["A creare la struttura base di una pagina", "E' un linguaggi di programmazione", "E' inutile", "Non so"]
+      },
+      {
+        "id": "8",
+        "question": "Cos'è il BGP?",
+        "answers": ["Un protocollo", "Un protocollo di routing", "E' un protocollo 'morto' come il RIP", "E' un protocollo non ancora affidabile"]
+      },
+      {
+        "id": "9'",
+        "question": "A cosa serve il framework Electron?",
+        "answers": ["Ad aiutare chi lavora con la chimica", "Permette di creare applicazioni desktop usando HTML, css e Javascript", "E' inutile", "E' un tipo di pasta"]
+      }
+    ]
+  }
